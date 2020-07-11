@@ -109,7 +109,7 @@ class SettingsCrudController extends CrudController
                 ],
                 'default' => json_encode([
                     'name' => 'value',
-                    'label' => 'Value',
+                    'label' => trans('brandstudio::settings.setting_value'),
                     'type' => 'text',
                 ]),
             ],
