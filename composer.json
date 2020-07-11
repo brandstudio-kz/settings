@@ -1,0 +1,44 @@
+{
+    "name": "brandstudio/settings",
+    "description": "BrandStudio settings package",
+    "keywords": [
+        "Brandstudio"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/brandstudio-kz/settings",
+    "authors": [
+        {
+            "name": "Nurdaulet",
+            "email": "nurik9293709@gmail.com",
+            "homepage": "https://sarsenovz2z.github.io/",
+            "role": "Developer"
+        },
+        {
+            "name": "Nurlan",
+            "email": "nurlan.bboy@gmail.com",
+            "homepage": "https://nurlanrazak.github.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "BrandStudio\\Settings\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BrandStudio\\Settings\\SettingsServiceProvider"
+            ]
+        }
+    }
+}
