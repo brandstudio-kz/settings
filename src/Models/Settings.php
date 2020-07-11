@@ -30,6 +30,10 @@ class Settings extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public static function get(string $key)
+    {
+        return static::scopeFindByKey($ke);
+    }
 
     /*
     |--------------------------------------------------------------------------
