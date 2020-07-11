@@ -2,7 +2,7 @@
 
 namespace BrandStudio\Settings\Http\Controllers;
 
-use BrandStudio\Settings\Http\Requests\SettingRequest;
+use BrandStudio\Settings\Http\Requests\SettingsRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -68,7 +68,7 @@ class SettingsCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->setValidation(SettingRequest::class);
+        $this->crud->setValidation(SettingsRequest::class);
 
         $this->crud->addFields([
             [
