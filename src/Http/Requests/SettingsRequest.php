@@ -28,7 +28,7 @@ class SettingsRequest extends FormRequest
     {
         return [
             'key' => [
-                Rule::unique('roles', 'key')
+                Rule::unique('settings', 'key')
             ]
         ];
     }
