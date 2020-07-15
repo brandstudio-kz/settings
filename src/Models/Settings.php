@@ -32,7 +32,7 @@ class Settings extends Model
     */
     public static function get(string $key)
     {
-        return static::scopeFindByKey($ke);
+        return static::findByKey($key)->value;
     }
 
     /*
