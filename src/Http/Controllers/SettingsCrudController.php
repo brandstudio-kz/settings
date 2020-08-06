@@ -6,8 +6,6 @@ use BrandStudio\Settings\Http\Requests\SettingsRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
-use App\Models\Setting;
-
 class SettingsCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
