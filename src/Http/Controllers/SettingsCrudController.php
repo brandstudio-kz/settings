@@ -28,7 +28,7 @@ class SettingsCrudController extends CrudController
     {
         $this->crud->setModel(config('settings.settings_class'));
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/settings');
-        $this->crud->setEntityNameStrings(trans_choice('brandstudio::settings.settings', 1), trans_choice('brandstudio::settings.settings', 2));
+        $this->crud->setEntityNameStrings(trans_choice('settings::admin.settings', 1), trans_choice('settings::admin.settings', 2));
         $this->crud->addClause('orderBy', 'lft');
         $this->crud->addClause('orderBy', 'updated_at', 'desc');
         if (config('app.env') == 'production') {
@@ -46,19 +46,19 @@ class SettingsCrudController extends CrudController
             ],
             [
                 'name' => 'name',
-                'label' => trans('brandstudio::settings.name'),
+                'label' => trans('settings::admin.name'),
             ],
             [
                 'name' => 'description',
-                'label' => trans('brandstudio::settings.description'),
+                'label' => trans('settings::admin.description'),
             ],
             [
                 'name' => 'value',
-                'label' => trans('brandstudio::settings.setting_value'),
+                'label' => trans('settings::admin.setting_value'),
             ],
             [
                 'name' => 'updated_at',
-                'label' => trans('brandstudio::settings.updated_at'),
+                'label' => trans('settings::admin.updated_at'),
                 'type' => 'datetime',
             ],
         ]);
@@ -71,7 +71,7 @@ class SettingsCrudController extends CrudController
         $this->crud->addFields([
             [
                 'name' => 'key',
-                'label' => trans('brandstudio::settings.key'),
+                'label' => trans('settings::admin.key'),
                 'attributes' => [
                     'required' => true,
                 ],
@@ -81,7 +81,7 @@ class SettingsCrudController extends CrudController
             ],
             [
                 'name' => 'name',
-                'label' => trans('brandstudio::settings.name'),
+                'label' => trans('settings::admin.name'),
                 'type' => 'text',
                 'attributes' => [
                     'required' => true,
@@ -92,12 +92,12 @@ class SettingsCrudController extends CrudController
             ],
             [
                 'name' => 'description',
-                'label' => trans('brandstudio::settings.description'),
+                'label' => trans('settings::admin.description'),
                 'type' => 'textarea',
             ],
             [
                 'name' => 'field',
-                'label' => trans('brandstudio::settings.field'),
+                'label' => trans('settings::admin.field'),
                 'type' => 'textarea',
                 'attributes' => [
                     'required' => true,
@@ -107,7 +107,7 @@ class SettingsCrudController extends CrudController
                 ],
                 'default' => json_encode([
                     'name' => 'value',
-                    'label' => trans('brandstudio::settings.setting_value'),
+                    'label' => trans('settings::admin.setting_value'),
                     'type' => 'text',
                 ]),
             ],
@@ -118,7 +118,7 @@ class SettingsCrudController extends CrudController
     {
         $this->crud->addColumn([
             'name' => 'key',
-            'label' => trans('brandstudio::settings.key'),
+            'label' => trans('settings::admin.key'),
         ]);
         $this->crud->set('show.setFromDb', false);
         $this->setupListOperation();
@@ -132,7 +132,7 @@ class SettingsCrudController extends CrudController
         }
         $this->crud->addColumn(            [
             'name' => 'description',
-            'label' => trans('brandstudio::settings.description'),
+            'label' => trans('settings::admin.description'),
             'limit' => 200000,
         ]);
         $this->crud->addColumn($field);

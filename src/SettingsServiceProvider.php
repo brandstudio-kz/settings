@@ -25,7 +25,7 @@ class SettingsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/resources/views', 'brandstudio');
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'brandstudio');
+        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'settings');
 
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom(__DIR__.'/database/migrations');
@@ -49,7 +49,7 @@ class SettingsServiceProvider extends ServiceProvider
         ], 'views');
 
         $this->publishes([
-            __DIR__.'/resources/lang'      => resource_path('lang/vendor/brandstudio')
+            __DIR__.'/resources/lang'      => resource_path('lang/vendor/settings')
         ], 'lang');
     }
 
