@@ -2,9 +2,10 @@
 
 return [
     'settings_class' => \BrandStudio\Settings\Models\Settings::class,
+    'cache_lifetime' => 5,
+
+    'sidebar_icon' => 'la la-cog',
 
     'use_backpack' => true,
-    'crud_middleware' => 'role:admin|developer',
-
-    'cache_lifetime' => 5,
+    'crud_middleware' => null,//'role:admin|developer',
 ];

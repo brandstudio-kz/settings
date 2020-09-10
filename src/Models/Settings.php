@@ -2,13 +2,10 @@
 
 namespace BrandStudio\Settings\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Illuminate\Database\Eloquent\Model;
+use BrandStudio\Starter\Models\Model;
 
 class Settings extends Model
 {
-    use CrudTrait;
-
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES

@@ -2,22 +2,23 @@
 
 namespace BrandStudio\Settings\Http\Controllers;
 
-use BrandStudio\Settings\Http\Requests\SettingsRequest;
-use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use BrandStudio\Starter\Http\Controllers\DefaultCrudController;
 
-class SettingsCrudController extends CrudController
+use BrandStudio\Settings\Http\Requests\SettingsRequest;
+
+class SettingsCrudController extends DefaultCrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
+    protected $class;
+    protected $requestClass = SettingsRequest::class;
 
     public function __construct()
     {
         parent::__construct();
+
+        $this->class = config('settings.settings_class');
+
 
         if (config('settings.crud_middleware')) {
             $this->middleware(config('settings.crud_middleware'));
@@ -26,19 +27,21 @@ class SettingsCrudController extends CrudController
 
     public function setup()
     {
-        $this->crud->setModel(config('settings.settings_class'));
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/settings');
-        $this->crud->setEntityNameStrings(trans_choice('settings::admin.settings', 1), trans_choice('settings::admin.settings', 2));
-        $this->crud->addClause('orderBy', 'lft');
-        $this->crud->addClause('orderBy', 'updated_at', 'desc');
+        parent::setup();
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/settings');
+        CRUD::setEntityNameStrings(trans_choice('settings::admin.settings', 1), trans_choice('settings::admin.settings', 2));
+
+        CRUD::addClause('orderBy', 'lft');
+        CRUD::addClause('orderBy', 'updated_at', 'desc');
+
         if (config('app.env') == 'production') {
-            $this->crud->denyAccess(['create', 'delete']);
+            CRUD::denyAccess(['create', 'delete']);
         }
     }
 
     protected function setupListOperation()
     {
-        $this->crud->addColumns([
+        CRUD::addColumns([
             [
                 'name' => 'row_number',
                 'label' => '#',
@@ -66,9 +69,9 @@ class SettingsCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->setValidation(SettingsRequest::class);
+        parent::setupCreateOperation();
 
-        $this->crud->addFields([
+        CRUD::addFields([
             [
                 'name' => 'key',
                 'label' => trans('settings::admin.key'),
@@ -116,37 +119,39 @@ class SettingsCrudController extends CrudController
 
     protected function setupShowOperation()
     {
-        $this->crud->addColumn([
+        CRUD::addColumn([
             'name' => 'key',
             'label' => trans('settings::admin.key'),
         ]);
-        $this->crud->set('show.setFromDb', false);
-        $this->setupListOperation();
-        $this->crud->removeColumns(['value', 'description']);
 
-        $setting = $this->crud->getCurrentEntry();
+        parent::setupShowOperation();
+
+        CRUD::removeColumns(['value', 'description']);
+
+        $setting = CRUD::getCurrentEntry();
         $field = json_decode($setting->field, true);
         if (($field['type'] ?? 'text') == 'ckeditor') {
             $field['type'] = 'markdown';
             $field['limit'] = 20000;
         }
-        $this->crud->addColumn(            [
+        CRUD::addColumn(            [
             'name' => 'description',
             'label' => trans('settings::admin.description'),
             'limit' => 200000,
         ]);
-        $this->crud->addColumn($field);
+        CRUD::addColumn($field);
     }
 
     protected function setupUpdateOperation()
     {
-        $this->setupCreateOperation();
-        $setting = $this->crud->getCurrentEntry();
+        parent::setupUpdateOperation();
+
+        $setting = CRUD::getCurrentEntry();
         $field = json_decode($setting->field, true);
-        $this->crud->addField($field);
+        CRUD::addField($field);
         if (config('app.env') == 'production') {
-            $this->crud->removeField('field');
-            $this->crud->removeField('key');
+            CRUD::removeField('field');
+            CRUD::removeField('key');
         }
     }
 }
