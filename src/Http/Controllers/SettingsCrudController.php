@@ -41,6 +41,8 @@ class SettingsCrudController extends DefaultCrudController
 
     protected function setupListOperation()
     {
+        parent::setupListOperation();
+
         CRUD::addColumns([
             [
                 'name' => 'row_number',
