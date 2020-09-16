@@ -28,7 +28,7 @@ class SettingsRequest extends FormRequest
     {
         return [
             'key' => [
-                Rule::unique('settings', 'key')
+                Rule::unique('settings', 'key')->where('id', '<>', request()->id)
             ]
         ];
     }

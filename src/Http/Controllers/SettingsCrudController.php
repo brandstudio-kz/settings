@@ -9,6 +9,7 @@ use BrandStudio\Settings\Http\Requests\SettingsRequest;
 
 class SettingsCrudController extends DefaultCrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ReorderOperation;
 
     protected $class;
     protected $requestClass = SettingsRequest::class;
@@ -60,6 +61,8 @@ class SettingsCrudController extends DefaultCrudController
             [
                 'name' => 'value',
                 'label' => trans('settings::admin.setting_value'),
+                'view_namespace' => 'brandstudio::settings',
+                'type' => 'value'
             ],
             [
                 'name' => 'updated_at',
