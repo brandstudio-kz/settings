@@ -29,11 +29,18 @@ class Settings extends Model
     */
     public static function get(string $key)
     {
+        if (!config('brandstudio.settings.cache_lifetime')) {
+            return static::findByKey($key)->value;
+        }
+
+        if (\Cache::has("brandstudio_settings_{$key}")) {
+            return \Cache::get("brandstudio_settings_{$key}");
+        }
+
         return \Cache::remember("brandstudio_settings_{$key}", config('brandstudio.settings.cache_lifetime'), function() use($key) {
             return static::findByKey($key)->value;
         });
     }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
