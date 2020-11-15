@@ -1,8 +1,8 @@
 @php
     $column['text'] = Illuminate\Mail\Markdown::parse($entry->{$column['name']} ?? '');
     $column['escaped'] = $column['escaped'] ?? false;
-    if (config('settings.column_limit') && $column['text']) {
-        $column['text'] = Str::limit($value, config('settings.column_limit'), '[...]');
+    if (!$column['escaped'] && config('settings.column_limit') && $column['text']) {
+        $column['text'] = Str::limit($column['text'], config('settings.column_limit'), '[...]');
     }
 @endphp
 
