@@ -1,6 +1,9 @@
 @php
     $column['text'] = Illuminate\Mail\Markdown::parse($entry->{$column['name']} ?? '');
     $column['escaped'] = $column['escaped'] ?? false;
+    if (config('settings.column_limit') && $column['text']) {
+        $column['text'] = Str::limit($value, config('settings.column_limit'), '[...]');
+    }
 @endphp
 
 @includeWhen(!empty($column['wrapper']), 'crud::columns.inc.wrapper_start')
